@@ -27,7 +27,7 @@
                 response.json().then(value => {
                     mensagem.textContent=value.message
                     if(value.redirect){
-                        window.location = "shrek.html"
+                        window.location = value.message
                     }
                 })
             }).catch(erro => {
