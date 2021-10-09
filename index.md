@@ -1,3 +1,5 @@
+<html>
 Welcome to my puzzle plaza! If you've got here it's because you already solved our first puzzle, so you know by now that hints come in pairs! The solutions should be brought here and typed below. Let's solve them all!
 
-<input type="password">
+<input type="username">
+</html>
