@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color:#303030;">
+    <h1  style="color:orange">FINAL PUZZLE</h1>
+
+    <img src="https://media.discordapp.net/attachments/650402257657004035/847912282783744030/garfeld.png" width=110 height=134 />
+    <b>
+    <p style="color:orange"> This is the moment that truly matters. I am so so hungry.</p> 
+    <p style="color:orange"> I doubt you'll help me consume the hedgehog, but we can strike a deal... </p>
+    <p style="color:orange"> You bring him to me and i'll let the car go.</p>
+    <p style="color:orange"> So what will it be? They'll both try to save themselves but you can only help one.</p>
+    </b>
+    <br>
+    <p style="color:white"> This password field accepts two very distinct passwords. Once a correct password has been inputted by anyone, fate will be decided forever.</p>
+    <p style="color:white"> Work together with your team. And save your Mascot from the wrath of Garfeld</p>
+    <div style="display:flex"> 
+        <input type="username" style="margin-right:5px" id="senha">
+        <input type="button"  value = "Ok" onclick="testasenha()"/>
+    </div>
+    
+    <p style="color:white" id="mensagem"></p>
+</body>
+<script>
+    
+    function testasenha(){
+        let senha = document.getElementById("senha").value
+        let mensagem = document.getElementById("mensagem")
+        if(senha==""){
+            mensagem.textContent = "Please insert a password"
+        }else{
+            fetch(`https://puzzleplaza.herokuapp.com/executeEnd/${senha}`).then(response => {
+                response.json().then(value => {
+                    checafinal()
+                })
+            }).catch(erro => {
+                mensagem.textContent="An error occured, please contact Graek"
+            })
+        }
+        checafinal()
+        return
+    }
+    function checafinal(){
+        let mensagem = document.getElementById("mensagem")
+        fetch(`https://puzzleplaza.herokuapp.com/valend/`).then(response => {
+            response.json().then(value => {
+                if(value.status=="fancy"){
+                    mensagem.textContent="The Fancy Hedgehog Team has inputted the correct password. And as such he alone will survive. The electric car will not be remembered."
+                    mensagem.setAttribute("style","color:aqua")
+                }
+                else if(value.status=="electric"){
+                    mensagem.textContent="The Electric Car Team has inputted the correct password. And as such the car alone will survive. The fancy hedgehog will not be remembered."
+                    mensagem.setAttribute("style","color:yellow")
+                }
+                else{
+                    mensagem.textContent="Who will win?"
+                    mensagem.setAttribute("style","color:white")
+                }
+            })
+        })
+        return
+    }
+    setInterval(checafinal,5000)
+    //imagem.setAttribute("src","URL")
+    checafinal()
+</script>
+</html>
