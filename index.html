@@ -42,7 +42,7 @@
         let time = date.getHours().toString() + date.getMinutes().toString()
         fetch(`https://puzzleplaza.herokuapp.com/valtime/${time}`).then(response => {
             response.json().then(value => {
-                mensagem.textContent=value.message
+                mensagem.textContent=value.timemessage
             })
         })
         return
