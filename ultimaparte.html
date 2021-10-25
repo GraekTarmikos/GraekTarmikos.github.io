@@ -30,6 +30,9 @@
         }else{
             fetch(`https://puzzleplaza.herokuapp.com/executeEnd/${senha}`).then(response => {
                 response.json().then(value => {
+                    if(value.status=="INCORRECT"){
+                        alert("Incorrect Password!")
+                    }
                     checafinal()
                 })
             }).catch(erro => {
