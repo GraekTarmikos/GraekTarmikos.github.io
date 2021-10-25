@@ -30,10 +30,10 @@
         }else{
             fetch(`https://puzzleplaza.herokuapp.com/executeEnd/${senha}`).then(response => {
                 response.json().then(value => {
-                    if(value.status=="INCORRECT"){
+                    checafinal()
+                    if(value.pass=="INCORRECT"){
                         alert("Incorrect Password!")
                     }
-                    checafinal()
                 })
             }).catch(erro => {
                 mensagem.textContent="An error occured, please contact Graek"
