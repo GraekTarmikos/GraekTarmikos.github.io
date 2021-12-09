@@ -1,11 +1,28 @@
 <!DOCTYPE html>
+
+<!-- 
+Still no point checking the source code.
+
+The passwords do not exist here, nothing here is a hint.
+-->
+
+
 <html>
 <body style="background-color:#303030;">
     <h1  style="color:orange">FINAL PUZZLE</h1>
 
-    <img src="https://media.discordapp.net/attachments/650402257657004035/847912282783744030/garfeld.png" width=110 height=134 />
-    <b>
-    <p style="color:orange"> You shouldn't be here yet, please leave.</p> 
+    <img src="https://media.discordapp.net/attachments/650402257657004035/902992884062634024/comic.png" width=877 height=676 />
+
+<br>
+    <p style="color:white"> This password field accepts two very distinct passwords. Once a correct password has been inputted by anyone, fate will be decided forever.</p>
+    <p style="color:white"> Be careful though, while a correct password will end the game immediately. Competition might not be the only solution.</p>
+    <p style="color:white"> Work together with your team. And save your Mascot from the wrath of Garfeld</p>
+    <div style="display:flex"> 
+        <input type="username" style="margin-right:5px" id="senha">
+        <input type="button"  value = "Ok" onclick="testasenha()"/>
+    </div>
+    
+    <p style="color:white" id="mensagem"></p>
 </body>
 <script>
     
@@ -18,9 +35,9 @@
             fetch(`https://puzzleplaza.herokuapp.com/executeEnd/${senha}`).then(response => {
                 response.json().then(value => {
                     checafinal()
-                    if(value.pass=="INCORRECT"){
-                        alert("Incorrect Password!")
-                    }
+
+                    mensagem.textContent=value.pass
+                    
                 })
             }).catch(erro => {
                 mensagem.textContent="An error occured, please contact Graek"
@@ -34,15 +51,18 @@
         fetch(`https://puzzleplaza.herokuapp.com/valend/`).then(response => {
             response.json().then(value => {
                 if(value.status=="fancy"){
-                    mensagem.textContent="The Fancy Hedgehog Team has inputted the correct password. And as such he alone will survive. The electric car will not be remembered."
+                    mensagem.textContent=value.pass
                     mensagem.setAttribute("style","color:aqua")
                 }
                 else if(value.status=="electric"){
-                    mensagem.textContent="The Electric Car Team has inputted the correct password. And as such the car alone will survive. The fancy hedgehog will not be remembered."
+                    mensagem.textContent=value.pass
                     mensagem.setAttribute("style","color:yellow")
                 }
+                else if(value.status=="secret"){
+                    mensagem.textContent=value.pass
+                    mensagem.setAttribute("style","color:green")
+                }
                 else{
-                    mensagem.textContent="Who will win?"
                     mensagem.setAttribute("style","color:white")
                 }
             })
